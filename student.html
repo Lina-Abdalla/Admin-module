@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>TURQUOISE Admin Panel</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f1f1f1;
+            font-family: Arial, sans-serif;
+        }
+        #sidebar {
+            width: 250px;
+            background-color: #176B87;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            padding-top: 20px;
+        }
+        #sidebar #logo {
+            text-align: ;
+            margin-bottom: 20px;
+        }
+        #sidebar #logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        #sidebar #logo h1 {
+            color: #fff;
+            display: inline;
+        }
+        #sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #sidebar ul li {
+            padding: 10px;
+            text-align: center;
+        }
+        #sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        #content {
+            margin-left: 260px;
+            padding: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border-radius: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #C7E0F4;
+            color: #000;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .actions {
+            text-align: center;
+        }
+        .remove-link {
+            color: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar">
+        <div id="logo">
+            <img src="C:\Users\Hp\Desktop\LENA\AD\Admin mudule/sir al min school.png" alt="Logo">
+            <h1>TURQUOISE</h1>
+        </div>
+        <ul>
+            <li><a href="#">Add Student</a></li>
+            <li><a href="teacher.html">Add Teachers</a></li>
+			<li><a href="annual update.html">Annual Update</a></li>
+        </ul>
+    </div>
+    <div id="content">
+        <h1>Welcome to TURQUOISE Admin Panel</h1>
+        
+		
+        <h2>Student List</h2>
+		<br>
+		<div style="text-align: left;">
+            <input type="text" id="search" placeholder="Search Students" oninput="searchStudents()">
+            
+        </div>
+		<div style="text-align: right;">
+            <button id="addStudentButton" style="background-color: #176B87; color: #fff; border: none; border-radius: 5px; padding: 10px; cursor: pointer;" onclick="openAddStudentPopup()">Add Student</button>
+        </div>
+		<br>
+		<br>
+		
+       <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Class Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td>1A1</td>
+                    <td class="actions">
+					    
+                        
+                        <a href="#" onclick="confirmDelete(1)"><img width="20" height="20" src="https://img.icons8.com/ios/50/delete--v1.png" alt="delete--v1"/></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>2A2</td>
+                    <td class="actions">
+                        
+                        <a href="#" onclick="confirmDelete(2)"><img width="20" height="20" src="https://img.icons8.com/ios/50/delete--v1.png" alt="delete--v1"/></a>
+                    </td>
+                </tr>
+				<tr>
+                    <td>Mary</td>
+                    <td>2A4</td>
+                    <td class="actions">
+					    
+                        
+                        <a href="#" onclick="confirmDelete(3)"><img width="20" height="20" src="https://img.icons8.com/ios/50/delete--v1.png" alt="delete--v1"/></a>
+                    </td>
+                </tr>
+				<tr>
+                    <td>Alice</td>
+                    <td>2A1</td>
+                    <td class="actions">
+					    
+                       
+                        <a href="#" onclick="confirmDelete(4)"><img width="20" height="20" src="https://img.icons8.com/ios/50/delete--v1.png" alt="delete--v1"/></a>
+                    </td>
+                </tr>
+                <!-- Add more rows with dummy data here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function confirmDelete(rowIndex) {
+            var table = document.querySelector("table");
+            var name = table.rows[rowIndex].cells[0].innerText;
+
+            if (confirm("Are you sure you want to delete " + name + "?")) {
+                table.deleteRow(rowIndex);
+            }
+        }
+
+        function searchStudents() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("search");
+    filter = input.value.toUpperCase();
+    table = document.querySelector("table");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0]; // Change the index to match the column you want to search
+        if (td) {
+            txtValue = td.innerText || td.textContent;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+		
+		function openAddStudentPopup() {
+            var studentName = prompt("Enter the student's name:");
+            var className = prompt("Enter the class name:");
+
+            if (studentName !== null && className !== null) {
+                var table = document.querySelector("table");
+                var row = table.insertRow(table.rows.length); // Add a new row at the end of the table
+
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+
+                cell1.innerText = studentName;
+                cell2.innerText = className;
+                cell3.className = "actions";
+                cell3.innerHTML = '<a href="#"><img width="20" height="20" src="https://img.icons8.com/ios/50/edit--v1.png" alt="edit--v1"/></a>' +
+                                  '<a href="#" onclick="confirmDelete(' + (row.rowIndex - 1) + ')"><img width="20" height="20" src="https://img.icons8.com/ios/50/delete--v1.png" alt="delete--v1"/></a>';
+            }
+        }
+		function downloadList() {
+            var table = document.querySelector("table");
+            var rows = table.rows;
+            var csvContent = "data:text/csv;charset=utf-8,";
+
+            for (var i = 0; i < rows.length; i++) {
+                var cells = rows[i].cells;
+                var rowText = [];
+
+                for (var j = 0; j < cells.length; j++) {
+                    rowText.push(cells[j].innerText);
+                }
+
+                csvContent += rowText.join(",") + "\n";
+            }
+
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "student_list.csv");
+            document.body.appendChild(link);
+            link.click();
+        }
+    </script>
+	<div style="text-align: center;">
+        <button onclick="downloadList()">Download List</button>
+    </div>
+</body>
+<footer>
+    <a href="https://icons8.com/icon/pre7LivdxKxJ/delete">Delete</a> icon by <a href="https://icons8.com">Icons8</a>
+</footer>
+</html>
+
