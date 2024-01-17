@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TURQUOISE Admin Panel</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <style>
+      body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.navbar {
+    background-color: #176B87; /* Dark shade for navbar */
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between; /* Aligns content on opposite ends */
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+	border-radius: 5px;
+}
+
+.navbar-content {
+    display: flex;
+    align-items: center;
+}
+
+.page-name {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-right: 20px; /* Space between page name and user info */
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-name {
+    font-size: 1rem;
+    margin-right: 10px;
+}
+
+.user-avatar {
+    width: 40px; /* Adjust size as necessary */
+    height: 40px;
+    border-radius: 50%; /* Circular avatar */
+    border: 2px solid #fff; /* White border for contrast */
+}
+
+
+
+        #sidebar {
+    width: 250px;
+    background: linear-gradient(165deg, #145B77 30%, #176B87 100%); /* Subtle gradient */
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding-top: 20px;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    z-index: 1000; /* Ensure sidebar is always on top */
+}
+
+#sidebar #logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#sidebar #logo img {
+    width: 100px; /* Slightly larger logo */
+    height: 100px;
+    border-radius: 50%; /* Perfect circle */
+    margin-bottom: 10px;
+}
+
+#sidebar #logo h1 {
+    color: #fff;
+    font-size: 24px; /* Adjusted for better visibility */
+    font-weight: bold;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#sidebar ul li {
+    position: relative;
+    padding: 10px 20px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px; /* Rounded edges */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+#sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: flex; /* Aligns icons and text */
+    align-items: center; /* Centers items vertically */
+}
+
+#sidebar ul li a i { /* Icon styling */
+    margin-right: 10px; /* Space between icon and text */
+    font-size: 18px; /* Icon size */
+}
+
+#sidebar ul li.active, #sidebar ul li:hover { /* Active/Hover state */
+    background-color: #ddf1ff; 
+    color: #176B87; /* Adjust as needed */
+}
+
+#sidebar ul li.active a, #sidebar ul li:hover a { /* Active/Hover link state */
+    color: #176B87; /* Adjust as needed */
+}
+
+
+        #content {
+            margin-left: 260px;
+            padding: 20px;
+        }
+        .card {
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: none;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            margin-bottom: 15px;
+        }
+
+        .card .fa-users {
+            color: #176B87;
+        }
+
+        h2 {
+            color: #176B87;
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #176B87;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #15566f;
+        }
+		
+		  .time-selector {
+            margin: 20px 0;
+            font-size: 1rem;
+        }
+
+        .time-selector label {
+            margin-right: 10px;
+        }
+
+        #timeFrame {
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="sidebar">
+    <div id="logo">
+        <img src="C:\Users\Hp\Desktop\LENA\AD\Admin-mudule/sir al min school.png" alt="Logo">
+        <h1>TURQUOISE</h1>
+    </div>
+    <ul>
+        <li><a href="landingpage.html"><i class="fa fa-home"></i> Landing page</a></li>
+        <li><a href="teacher.html"><i class="fa fa-user"></i> Teachers List</a></li>
+        <li><a href="view.html"><i class="fa fa-users"></i> Students List</a></li>
+		<li><a href="user.html"><i class="fa fa-users"></i> User List</a></li>
+    </ul>
+</div>
+    <div id="content">
+        <nav class="navbar">
+    <div class="navbar-content">
+        <span class="page-name">Landing Page</span> <!-- Dynamic current page name -->
+        
+    </div>
+</nav>
+      <div class="time-selector">
+            <label for="timeFrame">Show updates for the last:</label>
+            <select id="timeFrame">
+                <option value="1">Today</option>
+                <option value="7" selected>Last 7 Days</option>
+                <option value="30">Last 30 Days</option>
+            </select>
+        </div>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <div  class="pt-3">
+                <h1>Welcome to TURQUOISE Admin Panel</h1>
+                <div id="totalCounts" class="my-3">
+                    <h2>Total Counts</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-user-graduate"></i> Total Students</h5>
+                                    <p id="totalStudents" class="card-text">Loading...</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-chalkboard-teacher"></i> Total Teachers</h5>
+                                    <p id="totalTeachers" class="card-text">Loading...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="recentAdditions">
+                    <h2>Recent Additions</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-users"></i> Recent Students</h5>
+                                    <ul id="recentStudentsList" class="list-unstyled"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-users"></i> Recent Teachers</h5>
+                                    <ul id="recentTeachersList" class="list-unstyled"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+<script type="module">
+        // Firebase imports and configuration
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+        import { getFirestore, collection, getDocs, query, orderBy, limit, where, Timestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+    apiKey: "AIzaSyA8vydj3oJu9g90W7jVKyjY7NQzvtUUTko",
+    authDomain: "turquoise-9d090.firebaseapp.com",
+    projectId: "turquoise-9d090",
+    storageBucket: "turquoise-9d090.appspot.com",
+    messagingSenderId: "942530582497",
+    appId: "1:942530582497:web:67204c20d2ebdb7a3d64a0",
+    measurementId: "G-0RE20PDVEN"
+  };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectedTimeFrame = parseInt(document.getElementById('timeFrame').value, 10);
+            fetchTotalCounts();
+            fetchRecentAdditions(db, "Turquoise/Students/PersonalInfo", "recentStudentsList", selectedTimeFrame);
+            fetchRecentAdditions(db, "Turquoise/Teachers/PersonalInfo", "recentTeachersList", selectedTimeFrame);
+        });
+
+        document.getElementById('timeFrame').addEventListener('change', function() {
+            const selectedTimeFrame = parseInt(this.value, 10);
+            fetchRecentAdditions(db, "Turquoise/Students/PersonalInfo", "recentStudentsList", selectedTimeFrame);
+            fetchRecentAdditions(db, "Turquoise/Teachers/PersonalInfo", "recentTeachersList", selectedTimeFrame);
+        });
+
+        // Fetch and display the total counts of students and teachers
+function fetchTotalCounts() {
+    getDocs(collection(db, "Turquoise/Students/PersonalInfo")).then(snapshot => {
+        document.getElementById('totalStudents').innerText = snapshot.size;
+    });
+
+    getDocs(collection(db, "Turquoise/Teachers/PersonalInfo")).then(snapshot => {
+        document.getElementById('totalTeachers').innerText = snapshot.size;
+    });
+}
+
+// Fetch and display the recently added students and teachers based on the selected time frame
+function fetchRecentAdditions(db, collectionPath, elementId, timeFrame) {
+    const now = new Date();
+  const start = new Date(now);
+  const end = new Date(now);
+
+  switch(timeFrame) {
+    case 1: // Today
+      start.setHours(0,0,0,0);
+      end.setHours(23,59,59,999);
+      break;
+    case 7: // Last 7 Days
+      start.setDate(now.getDate() - 7);
+      start.setHours(0,0,0,0);
+      end.setDate(now.getDate() - 1);
+      end.setHours(23,59,59,999);
+      break;
+   case 30: // Last 30 Days
+    start.setDate(now.getDate() - 30);
+    start.setHours(0,0,0,0);
+    end.setDate(now.getDate() - 7);
+    end.setHours(23,59,59,999);
+    break;
+  }
+    // Logging the dates for debugging
+    console.log("Time Frame:", timeFrame);
+    console.log("Start Date:", start.toLocaleString());
+    console.log("end Date:", end.toLocaleString());
+
+     // Create and execute the query
+   const startTimestamp = Timestamp.fromDate(start);
+const endTimestamp = Timestamp.fromDate(end);
+
+const q = query(
+    collection(db, collectionPath),
+    where("addedTimestamp", ">=", startTimestamp), // Greater than or equal to start
+    where("addedTimestamp", "<=", endTimestamp),   // Less than or equal to end
+    orderBy("addedTimestamp", "desc"),
+    limit(5)
+);
+
+    getDocs(q).then(snapshot => {
+        const listElement = document.getElementById(elementId);
+        listElement.innerHTML = ""; // Clear existing list items
+
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            const name = data.Name || "Unnamed"; // Provide a default if the name field is missing
+            const timestamp = data.addedTimestamp.toDate();
+            const dateStr = timestamp ? timestamp.toLocaleString() : 'No date available';
+            const listItem = `<li>${name} - Added on: ${dateStr}</li>`;
+            listElement.innerHTML += listItem;
+        });
+
+        // Provide feedback if no records were found in the selected time frame
+        if (snapshot.size === 0) {
+            listElement.innerHTML = `<li>No additions in the last ${timeFrame} days</li>`;
+        }
+    }).catch(error => {
+        console.error("Error fetching recent additions: ", error);
+        document.getElementById(elementId).innerHTML = "<li>Error fetching data</li>";
+    });
+}
+
+
+
+
+    </script>
+</body>
+
+</html>
+
+
